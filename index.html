@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stan Terekopf – AI & Neurotech Product Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Stan Terekopf – AI & neurotech product builder working on trading systems, immersive experience tech, and creative tools." />
+  <style>
+    :root {
+      --bg: #050712;
+      --bg-alt: #070b18;
+      --card: rgba(15, 18, 32, 0.92);
+      --border: rgba(255, 255, 255, 0.06);
+      --accent: #22d3ee;
+      --accent-soft: rgba(34, 211, 238, 0.18);
+      --accent-2: #a855f7;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.65);
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Inter", sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.16) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.18) 0, transparent 55%),
+        linear-gradient(135deg, #020617, #020617 45%, #050816 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 28px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-inner {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-orb {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(from 210deg,
+      #22d3ee, #a855f7, #22c55e, #22d3ee);
+      box-shadow: 0 0 28px rgba(34, 211, 238, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-orb::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 10%, rgba(255,255,255,.4) 0, transparent 40%),
+      radial-gradient(circle at 70% 90%, rgba(15,23,42,1) 0, rgba(15,23,42,1) 60%);
+    }
+
+    .logo-text-main {
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.18s ease-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    nav a:hover {
+      border-color: rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,.6);
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 28px;
+      margin-bottom: 36px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(34,211,238,0.16), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(168,85,247,0.12), transparent 55%),
+      var(--card);
+      border-radius: var(--radius-xl);
+      padding: 22px 22px 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      mask: linear-gradient(#fff, transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 9px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-badge-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(34,211,238,0.2), rgba(168,85,247,0.3));
+      color: #e0f2fe;
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 6px 0 8px;
+    }
+
+    .hero-title span.grad {
+      background: linear-gradient(120deg, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 32rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary, .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.18s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22d3ee, #a855f7);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 16px 40px rgba(34, 211, 238, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 55px rgba(34, 211, 238, 0.55);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.8);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.94);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 14px 14px 12px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+
+    .card-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.75rem;
+      color: #e5e7eb;
+    }
+
+    .pill.accent {
+      background: var(--accent-soft);
+      border-color: rgba(34, 211, 238, 0.8);
+      color: #e0f2fe;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #e5e7eb;
+    }
+
+    .section-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .section-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 16px 16px 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .about-text strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .about-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .about-meta-item {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15,23,42,1);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .project-card {
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top left, rgba(34,211,238,0.12), transparent 60%),
+      radial-gradient(circle at bottom right, rgba(168,85,247,0.1), transparent 60%),
+      rgba(15,23,42,0.98);
+      padding: 12px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-chip-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .project-chip {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      color: rgba(148,163,184,0.8);
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 550;
+      color: #e5e7eb;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .project-meta span {
+      font-size: 0.76rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(148,163,184,0.45);
+      color: #e5e7eb;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .skills-card-title {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skills-list span {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,1);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: #e5e7eb;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: grid;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr);
+      gap: 10px;
+      align-items: baseline;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-item {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .timeline-year {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(148,163,184,0.9);
+    }
+
+    .timeline-text {
+      line-height: 1.6;
+    }
+
+    /* Contact */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-main {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.55);
+      background: rgba(15,23,42,1);
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      text-decoration: none;
+      transition: all 0.16s ease-out;
+    }
+
+    .contact-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,0.9);
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: rgba(148,163,184,0.75);
+      text-align: center;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a.inline-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(34,211,238,0.4);
+    }
+
+    a.inline-link:hover {
+      border-bottom-color: rgba(34,211,238,0.8);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="page-inner">
+    <header>
+      <div class="logo">
+        <div class="logo-orb"></div>
+        <div>
+          <div class="logo-text-main">TEREKOPF.TECH</div>
+          <div class="logo-text-sub">AI · Neurotech · Product</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about"><span class="dot"></span>About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#timeline">Journey</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-main">
+          <div class="hero-badge">
+            <span class="hero-badge-pill">Building systems of the future</span>
+            <span>Immersive tech · AI · product</span>
+          </div>
+          <h1 class="hero-title">
+            Stan <span class="grad">Terekopf</span>
+          </h1>
+          <p class="hero-subtitle">
+            AI & neurotech-driven product builder crafting systems where
+            <strong>trading intelligence</strong>, <strong>immersive experience</strong>,
+            and <strong>real-world usability</strong> meet. From multi-layered Forex
+            assistants to recording and replaying human emotion.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">AI Forex Systems</span>
+            <span class="tag">BCI & Immersive Reality</span>
+            <span class="tag">iOS & Web Products</span>
+            <span class="tag">Creative Coding & Audio</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              View featured projects
+              <span>↘</span>
+            </a>
+            <a href="#contact" class="btn-ghost">
+              Open to collaboration
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="card">
+            <div class="card-title">Snapshot</div>
+            <div class="card-body">
+              Immigrant in Los Angeles, building technology that helps people
+              <strong>navigate complex systems</strong>: markets, bureaucracy, and
+              their own emotional experience.
+              <div class="pill-row">
+                <span class="pill accent">LA · PST</span>
+                <span class="pill">Product & systems thinking</span>
+                <span class="pill">Hands-on with code</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Current focus</div>
+            <div class="card-body">
+              • AIA Forex System – self-learning assistant on top of MetaTrader 5
+              • NeuroSync / Senceteck – recording & replaying subjective experience
+              • EmotionSync – iOS app turning emotion into a shareable format (.EXP)
+              <div class="pill-row">
+                <span class="pill">Python · FastAPI</span>
+                <span class="pill">Next.js</span>
+                <span class="pill">SwiftUI</span>
+                <span class="pill">Gemini API · ML</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-header">
+          <div class="section-title">About</div>
+          <div class="section-sub">
+            From survival in a new country to building long-term systems.
+          </div>
+        </div>
+        <div class="section-card">
+          <p class="about-text">
+            I’m Stan, a product-minded technologist working at the intersection of
+            <strong>AI, neurotech, and human experience</strong>. I like taking messy
+            realities – financial markets, government services, emotional states – and
+            turning them into <strong>clear, structured systems</strong>.
+          </p>
+          <p class="about-text">
+            My background is a mix of law, technology, and creative work: I’ve designed
+            <strong>trading assistants</strong>, built <strong>event platforms</strong>,
+            explored <strong>immersive emotional media</strong>, and created
+            <strong>“clarity as a service”</strong> concepts for immigrants and locals
+            trying to navigate life in the US.
+          </p>
+          <p class="about-text">
+            I care about <strong>real-world usefulness</strong>: tools that
+            actually help people decide, act, and feel better – not just another
+            dashboard.
+          </p>
+          <div class="about-meta">
+            <div class="about-meta-item">Based in Los Angeles</div>
+            <div class="about-meta-item">Open to remote & hybrid roles</div>
+            <div class="about-meta-item">English · Russian</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-header">
+          <div class="section-title">Featured Projects</div>
+          <div class="section-sub">
+            A selection of systems and experiments that shaped my thinking.
+          </div>
+        </div>
+        <div class="projects-grid">
+          <!-- AIA Forex System -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">AIA Forex System</span>
+              <span class="project-tag">AI trading assistant · MT5</span>
+            </div>
+            <div class="project-title">Multi-layered Forex AI with risk brain</div>
+            <div class="project-desc">
+              A “Jarvis-style” assistant built on MetaTrader 5: real-time data ingestion,
+              feature builder, probabilistic forecasts, and a strict risk policy
+              (R-based sizing, loss limits, observe-only modes) wrapped in a FastAPI
+              backend and React UI.
+            </div>
+            <div class="project-meta">
+              <span>Python · FastAPI</span>
+              <span>MetaTrader5 API</span>
+              <span>ML & risk models</span>
+            </div>
+          </article>
+
+          <!-- NeuroSync / Senceteck -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">NeuroSync / Senceteck</span>
+              <span class="project-tag">Immersive Reality · BCI</span>
+            </div>
+            <div class="project-title">Recording & replaying subjective experience</div>
+            <div class="project-desc">
+              Concept and architecture for a system that captures multi-modal streams
+              (EEG/BCI, biometrics, video, audio) into a structured <strong>.EXP</strong>
+              format. Focus on synchronisation, emotional interpretation and safe
+              replay of lived experiences.
+            </div>
+            <div class="project-meta">
+              <span>BCI · EEG</span>
+              <span>Python services</span>
+              <span>Experience file format</span>
+            </div>
+          </article>
+
+          <!-- EmotionSync -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">EmotionSync</span>
+              <span class="project-tag">iOS app · IR</span>
+            </div>
+            <div class="project-title">Global Emotion Map & emotional library</div>
+            <div class="project-desc">
+              iOS prototype that lets users record emotional episodes, analyse them
+              with AI (video, audio, face/emotion tracking) and place them on a global
+              map. Includes emotion library with previews and an interpreter that
+              packs everything into .EXP.
+            </div>
+            <div class="project-meta">
+              <span>SwiftUI</span>
+              <span>Gemini API</span>
+              <span>MediaPipe · JSON pipelines</span>
+            </div>
+          </article>
+
+          <!-- Events -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">Events</span>
+              <span class="project-tag">iOS + Web</span>
+            </div>
+            <div class="project-title">Event platform with map & tickets</div>
+            <div class="project-desc">
+              Mobile-first app and web version where people can discover, create,
+              and register for events. Features interactive map, advanced filters,
+              ticket logic, and a chat-like experience for organisers and attendees.
+            </div>
+            <div class="project-meta">
+              <span>SwiftUI · MapKit</span>
+              <span>React SPA</span>
+              <span>FastAPI backend</span>
+            </div>
+          </article>
+
+          <!-- Etraxism / Civic clarity -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">Etraxism</span>
+              <span class="project-tag">Clarity as a Service</span>
+            </div>
+            <div class="project-title">Practical guide to life in complex systems</div>
+            <div class="project-desc">
+              Concept for a multi-language platform that explains documents, medical
+              services, taxes, immigration and more in simple language – especially
+              for immigrants. Mix of content, guided flows, and AI-assisted navigation.
+            </div>
+            <div class="project-meta">
+              <span>Next.js</span>
+              <span>Content systems</span>
+              <span>Service design</span>
+            </div>
+          </article>
+
+          <!-- Music & Audio -->
+          <article class="project-card">
+            <div class="project-chip-row">
+              <span class="project-chip">Music & Audio</span>
+              <span class="project-tag">Creative</span>
+            </div>
+            <div class="project-title">Exploring emotion through sound</div>
+            <div class="project-desc">
+              Vocal processing experiments (from phonk to industrial), beat production,
+              and sound design. Treating audio as another interface to subjective
+              experience and emotional states.
+            </div>
+            <div class="project-meta">
+              <span>Ableton Live</span>
+              <span>Waves · FabFilter</span>
+              <span>Conceptual sound design</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-header">
+          <div class="section-title">Skills & Stack</div>
+          <div class="section-sub">
+            Capable of going from concept and architecture to working prototype.
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="skills-grid">
+            <div>
+              <div class="skills-card-title">Engineering</div>
+              <div class="skills-list">
+                <span>Python · FastAPI</span>
+                <span>MetaTrader5 API</span>
+                <span>REST APIs</span>
+                <span>Streamlit</span>
+                <span>Git · CI basics</span>
+              </div>
+            </div>
+            <div>
+              <div class="skills-card-title">AI & Data</div>
+              <div class="skills-list">
+                <span>Time-series features</span>
+                <span>Risk-based metrics (R)</span>
+                <span>Model training pipelines</span>
+                <span>Knowledge extraction</span>
+                <span>Media analysis (video/audio)</span>
+              </div>
+            </div>
+            <div>
+              <div class="skills-card-title">Product & UX</div>
+              <div class="skills-list">
+                <span>System & product thinking</span>
+                <span>Prototyping</span>
+                <span>Information architecture</span>
+                <span>Spec writing</span>
+                <span>Hybrid online/offline flows</span>
+              </div>
+            </div>
+            <div>
+              <div class="skills-card-title">Platforms</div>
+              <div class="skills-list">
+                <span>Next.js · React</span>
+                <span>SwiftUI · iOS</span>
+                <span>Map-based UIs</span>
+                <span>Analytics & logging</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMELINE -->
+      <section id="timeline">
+        <div class="section-header">
+          <div class="section-title">Journey</div>
+          <div class="section-sub">
+            Not a straight line – more like a systems graph.
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">Earlier</div>
+              <div class="timeline-text">
+                Legal and analytical background, interest in how rules and systems
+                shape real life. First experiments with technology, automation,
+                and music production.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Moving to LA</div>
+              <div class="timeline-text">
+                Immigration, starting from scratch, learning how the US works from
+                the inside. Day jobs plus night projects in trading, apps, and
+                clarity tools for other people in the same situation.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Deep into AI</div>
+              <div class="timeline-text">
+                Building AIA Forex System, exploring self-training, risk policies,
+                feature builders, and orchestration layers. Designing infrastructure
+                that behaves more like a disciplined co-trader than a bot.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Immersive Reality</div>
+              <div class="timeline-text">
+                Senceteck, NeuroSync, and EmotionSync: shifting from “how markets
+                move” to “how humans experience reality”. Architecting .EXP as a
+                potential new medium for sharing subjective experience.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Now</div>
+              <div class="timeline-text">
+                Combining everything into a single direction: <strong>systems that
+                give people clarity and agency</strong>, whether they trade, move
+                countries, or explore new emotional states. Open to roles and
+                collaborations where this mindset is useful.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-header">
+          <div class="section-title">Contact</div>
+          <div class="section-sub">
+            For roles, collaborations, or deep-tech experiments.
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="contact-row">
+            <div class="contact-main">
+              Best way to reach me is by email. I’m especially interested in
+              <strong>AI-first product roles</strong>, <strong>deep-tech collaborations</strong>,
+              and <strong>experimental projects</strong> around trading, neurotech,
+              or immersive media.
+            </div>
+            <div class="contact-links">
+              <!-- Замени email и ссылки на свои -->
+              <a class="contact-pill" href="mailto:legatoice@gmail.com">
+                ✉ legatoice@gmail.com
+              </a>
+              <a class="contact-pill" href="#" target="_blank" rel="https://github.com/StanislavTerekhov">
+                GitHub
+              </a>
+              <a class="contact-pill" href="#" target="_blank" rel="https://www.linkedin.com/in/stanislav-terekhov-4ab069316/">
+                LinkedIn
+              </a>
+              <a class="contact-pill" href="#" target="_blank" rel="https://www.instagram.com/rocketbunnyproducer/">
+                instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Stanislav Terekhov · Built for a complex world.
+    </footer>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
