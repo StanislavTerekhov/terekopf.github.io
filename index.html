@@ -1,979 +1,1468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Stan Terekopf – AI & Neurotech Product Builder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Stan Terekopf – AI & neurotech product builder working on trading systems, immersive experience tech, and creative tools." />
+  <meta charset="UTF-8"/>
+  <title>TEREKHOV — AI & NEUROTECH</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --bg: #050712;
-      --bg-alt: #070b18;
-      --card: rgba(15, 18, 32, 0.92);
-      --border: rgba(255, 255, 255, 0.06);
-      --accent: #22d3ee;
-      --accent-soft: rgba(34, 211, 238, 0.18);
-      --accent-2: #a855f7;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.65);
-      --max-width: 980px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-      "Inter", sans-serif;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.16) 0, transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.18) 0, transparent 55%),
-        linear-gradient(135deg, #020617, #020617 45%, #050816 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .page {
-      min-height: 100vh;
-      padding: 28px 16px 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .page-inner {
-      width: 100%;
-      max-width: var(--max-width);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-orb {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: conic-gradient(from 210deg,
-      #22d3ee, #a855f7, #22c55e, #22d3ee);
-      box-shadow: 0 0 28px rgba(34, 211, 238, 0.7);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo-orb::after {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 10%, rgba(255,255,255,.4) 0, transparent 40%),
-      radial-gradient(circle at 70% 90%, rgba(15,23,42,1) 0, rgba(15,23,42,1) 60%);
-    }
-
-    .logo-text-main {
-      font-weight: 650;
-      letter-spacing: 0.06em;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-    }
-
-    .logo-text-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 0.85rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--muted);
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(10px);
-      transition: all 0.18s ease-out;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    nav a span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    nav a:hover {
-      border-color: rgba(148, 163, 184, 0.4);
-      color: var(--text);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(15,23,42,.6);
-    }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 28px;
-      margin-bottom: 36px;
-      align-items: center;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-main {
-      background: radial-gradient(circle at top left, rgba(34,211,238,0.16), transparent 55%),
-      radial-gradient(circle at bottom right, rgba(168,85,247,0.12), transparent 55%),
-      var(--card);
-      border-radius: var(--radius-xl);
-      padding: 22px 22px 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      mask: linear-gradient(#fff, transparent 60%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 9px 4px 4px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .hero-badge-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: linear-gradient(120deg, rgba(34,211,238,0.2), rgba(168,85,247,0.3));
-      color: #e0f2fe;
-      font-weight: 500;
-    }
-
-    .hero-title {
-      font-size: clamp(1.9rem, 3vw, 2.3rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin: 6px 0 8px;
-    }
-
-    .hero-title span.grad {
-      background: linear-gradient(120deg, #22d3ee, #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 32rem;
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .tag {
-      font-size: 0.78rem;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15,23,42,0.9);
-      color: #e5e7eb;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn-primary, .btn-ghost {
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: all 0.18s ease-out;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #22d3ee, #a855f7);
-      color: #0b1120;
-      font-weight: 600;
-      box-shadow: 0 16px 40px rgba(34, 211, 238, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 55px rgba(34, 211, 238, 0.55);
-    }
-
-    .btn-ghost {
-      background: rgba(15, 23, 42, 0.9);
-      border-color: rgba(148, 163, 184, 0.45);
-      color: var(--muted);
-    }
-
-    .btn-ghost:hover {
-      color: var(--text);
-      border-color: rgba(148, 163, 184, 0.8);
-      box-shadow: 0 12px 30px rgba(15,23,42,0.9);
-      transform: translateY(-1px);
-    }
-
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .card {
-      background: rgba(15, 23, 42, 0.94);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 14px 14px 12px;
-      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
-    }
-
-    .card-title {
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      color: #e5e7eb;
-    }
-
-    .card-body {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .pill {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      font-size: 0.75rem;
-      color: #e5e7eb;
-    }
-
-    .pill.accent {
-      background: var(--accent-soft);
-      border-color: rgba(34, 211, 238, 0.8);
-      color: #e0f2fe;
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 32px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #e5e7eb;
-    }
-
-    .section-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .section-card {
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.96);
-      padding: 16px 16px 12px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .about-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 10px;
-    }
-
-    .about-text strong {
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-
-    .about-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .about-meta-item {
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15,23,42,1);
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
-    .project-card {
-      border-radius: 16px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: radial-gradient(circle at top left, rgba(34,211,238,0.12), transparent 60%),
-      radial-gradient(circle at bottom right, rgba(168,85,247,0.1), transparent 60%),
-      rgba(15,23,42,0.98);
-      padding: 12px 12px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-chip-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .project-chip {
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15,23,42,0.9);
-    }
-
-    .project-tag {
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.8);
-    }
-
-    .project-title {
-      font-size: 0.95rem;
-      font-weight: 550;
-      color: #e5e7eb;
-    }
-
-    .project-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .project-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .project-meta span {
-      font-size: 0.76rem;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.92);
-      border: 1px solid rgba(148,163,184,0.45);
-      color: #e5e7eb;
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-    }
-
-    .skills-card-title {
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      color: #e5e7eb;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .skills-list span {
-      font-size: 0.8rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15,23,42,1);
-      border: 1px solid rgba(148,163,184,0.4);
-      color: #e5e7eb;
-    }
-
-    /* Timeline */
-    .timeline {
-      display: grid;
-      gap: 10px;
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 80px minmax(0, 1fr);
-      gap: 10px;
-      align-items: baseline;
-    }
-
-    @media (max-width: 600px) {
-      .timeline-item {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .timeline-year {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(148,163,184,0.9);
-    }
-
-    .timeline-text {
-      line-height: 1.6;
-    }
-
-    /* Contact */
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .contact-main {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 420px;
-      line-height: 1.6;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .contact-pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.55);
-      background: rgba(15,23,42,1);
-      font-size: 0.8rem;
-      color: #e5e7eb;
-      text-decoration: none;
-      transition: all 0.16s ease-out;
-    }
-
-    .contact-pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(15,23,42,0.9);
-    }
-
-    footer {
-      margin-top: 26px;
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.75);
-      text-align: center;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a.inline-link {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(34,211,238,0.4);
-    }
-
-    a.inline-link:hover {
-      border-bottom-color: rgba(34,211,238,0.8);
-    }
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --bg:        #07070A;
+  --bg2:       #0D0C10;
+  --red:       #C41A00;
+  --red2:      #E82200;
+  --red-dim:   rgba(196,26,0,0.12);
+  --red-glow:  rgba(196,26,0,0.28);
+  --blue:      #1A4FD8;
+  --blue-flag: #0038B8;
+  --blue2:     #4D80FF;
+  --blue-dim:  rgba(26,79,216,0.15);
+  --cream:     #EEE6D8;
+  --muted:     #6B6258;
+  --faint:     #3A3530;
+  --border:    rgba(238,230,216,0.06);
+  --b-red:     rgba(196,26,0,0.25);
+  --b-blue:    rgba(26,79,216,0.28);
+  --condensed: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+  --mono:      'Space Mono', 'Courier New', monospace;
+  --sans:      'Inter', system-ui, sans-serif;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color:inherit; text-decoration:none; }
+
+/* ── GLOBAL RED VIGNETTE (removed) ──────────── */
+.vignette { display: none; }
+
+/* ── SCANLINES ───────────────────────────────── */
+.scanlines {
+  position: fixed; inset: 0; z-index: 9890; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px);
+}
+
+/* ═══════════════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 5000;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: 36px 52px;
+  overflow: hidden;
+  transition: opacity 0.9s cubic-bezier(.4,0,.2,1),
+              visibility 0.9s;
+}
+#loader.out { opacity:0; visibility:hidden; }
+
+/* Animated Star of David in loader bg */
+.loader-star-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6vw;
+  pointer-events: none;
+}
+.loader-star-svg {
+  width: min(55vw, 560px);
+  height: min(55vw, 560px);
+}
+
+/* Triangle paths with stroke-dashoffset animation */
+.tri-up {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 0.8;
+  opacity: 0.28;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawStroke 2.4s cubic-bezier(.4,0,.2,1) 0.3s forwards;
+}
+.tri-down {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 0.8;
+  opacity: 0.2;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawStroke 2.4s cubic-bezier(.4,0,.2,1) 0.9s forwards;
+}
+.hex-inner {
+  fill: none;
+  stroke: var(--blue2);
+  stroke-width: 0.4;
+  opacity: 0.12;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: drawStroke 2s ease 1.5s forwards;
+}
+@keyframes drawStroke { to { stroke-dashoffset: 0; } }
+
+.loader-bottom { margin-top: auto; }
+
+.loader-count {
+  font-family: var(--condensed);
+  font-size: clamp(110px, 18vw, 220px);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  position: relative;
+  /* glitch flicker */
+  animation: countFlicker 0.08s infinite;
+}
+@keyframes countFlicker {
+  0%,94%,100% { opacity:1; }
+  95%          { opacity:0.92; }
+  97%          { opacity:1; }
+}
+
+.loader-bar-row {
+  width: 200px;
+  height: 1px;
+  background: var(--b-red);
+  margin: 18px 0 12px;
+  position: relative;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--red);
+  transition: width 0.08s linear;
+}
+
+.loader-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav#nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 400;
+  padding: 22px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, border-color 0.3s;
+}
+nav#nav.scrolled {
+  background: rgba(7,7,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--b-red);
+}
+
+.nav-logo {
+  font-family: var(--condensed);
+  font-size: 17px;
+  letter-spacing: 0.14em;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo-star {
+  width: 22px; height: 22px;
+}
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content:'';
+  position:absolute;
+  bottom:-3px; left:0; width:0; height:1px;
+  background: var(--red);
+  transition: width 0.2s;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 100px 52px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero big Star of David background */
+.hero-star-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(88vh, 780px);
+  pointer-events: none;
+  opacity: 0;
+  animation: heroStarIn 1.2s ease 0.3s forwards;
+}
+@keyframes heroStarIn {
+  to { opacity: 1; }
+}
+.hero-tri-up {
+  fill:none; stroke: var(--blue); stroke-width: 0.6; opacity:0.09;
+}
+.hero-tri-down {
+  fill:none; stroke: var(--red); stroke-width: 0.6; opacity:0.06;
+}
+.hero-hex {
+  fill:none; stroke:var(--blue2); stroke-width:0.3; opacity:0.06;
+}
+
+/* Moving scan line */
+.hero-scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%, var(--red) 25%, rgba(196,26,0,0.6) 50%, var(--red) 75%, transparent 100%);
+  opacity: 0.2;
+  animation: scan 10s linear infinite;
+  pointer-events: none;
+  top: 0;
+}
+@keyframes scan { from{top:0} to{top:100%} }
+
+/* Corner labels */
+.hero-corner {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hc-tl { top:90px; left:52px; }
+.hc-tr { top:90px; right:52px; text-align:right; }
+.hc-bl { bottom:32px; left:52px; }
+
+/* ── HERO TITLE ── */
+.hero-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  color: var(--red);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-eyebrow::before {
+  content:'';
+  display:block;
+  width:36px; height:1px;
+  background: var(--red);
+}
+
+.hero-h1 {
+  font-family: var(--condensed);
+  font-size: clamp(90px, 13vw, 200px);
+  line-height: 0.88;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.hero-h1 .line-solid {
+  display: block;
+  color: var(--cream);
+}
+.hero-h1 .line-red {
+  display: block;
+  color: var(--red);
+}
+
+.hero-sub {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 400px;
+  margin-top: 32px;
+}
+.hero-sub strong { color: var(--cream); font-weight:500; }
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.btn-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  background: var(--red);
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-red:hover { background: var(--red2); transform: translateY(-1px); }
+
+.btn-ghost-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 26px;
+  border: 1px solid var(--b-red);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-ghost-red:hover { border-color: var(--red); color: var(--red); transform: translateY(-1px); }
+
+/* ── STATS ROW ── */
+.hero-stats {
+  display: flex;
+  gap: 52px;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 2;
+}
+.hero-stat-n {
+  font-family: var(--condensed);
+  font-size: 52px;
+  line-height: 1;
+  color: var(--cream);
+  letter-spacing: 0.01em;
+}
+.hero-stat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   SECTIONS SHARED
+═══════════════════════════════════════════════ */
+.section {
+  padding: 96px 52px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sec-label::before {
+  content:'';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--red);
+}
+
+.sec-title {
+  font-family: var(--condensed);
+  font-size: clamp(52px, 7vw, 100px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 56px;
+}
+.sec-title .outline {
+  -webkit-text-stroke: 1px var(--cream);
+  color: transparent;
+}
+.sec-title .red { color: var(--red); }
+.sec-title .blue { color: var(--blue2); }
+
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+#about { background: var(--bg2); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-big-q {
+  font-family: var(--condensed);
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  position: sticky;
+  top: 80px;
+}
+.about-big-q .red {
+  -webkit-text-stroke: 1px var(--red);
+  color: transparent;
+}
+.about-big-q .blue {
+  -webkit-text-stroke: 1px var(--blue2);
+  color: transparent;
+}
+
+/* Israeli flag stripes */
+.flag-stripes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 32px;
+}
+.flag-stripes span {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+}
+.fs-blue { background: var(--blue-flag); width: 100%; opacity: 0.65; }
+.fs-gap  { background: transparent; height: 8px; }
+
+/* Star of David decorative */
+.about-star-deco {
+  width: 54px; height: 54px;
+  margin-top: 32px;
+  opacity: 0.15;
+}
+
+.about-body p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.92;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.about-body p strong { color: var(--cream); font-weight:500; }
+
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+.about-chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  padding: 5px 11px;
+  border: 1px solid var(--b-red);
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.about-chip:hover { border-color: var(--red); color: var(--red); }
+
+/* ═══════════════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════════════ */
+.proj-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 40px;
+}
+.proj-header-sub {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 260px;
+  text-align: right;
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.proj-card {
+  background: var(--bg);
+  padding: 28px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: background 0.25s;
+}
+.proj-card::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+}
+.proj-card:hover::after { transform: scaleX(1); }
+.proj-card:hover { background: rgba(196,26,0,0.05); }
+
+/* Magen David watermark per card */
+.pcard-star {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  width: 90px; height: 90px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.proj-card:hover .pcard-star { opacity: 0.07; }
+
+.pcard-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--red);
+}
+.pcard-cat {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blue2);
+  opacity: 0.7;
+}
+.pcard-title {
+  font-family: var(--condensed);
+  font-size: 26px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+.pcard-desc {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+  flex: 1;
+}
+.pcard-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.pcard-tech span {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  padding: 3px 7px;
+  border: 1px solid var(--faint);
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════ */
+#skills { background: rgba(196,26,0,0.04); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.skill-col {
+  padding: 28px 22px;
+  border-right: 1px solid var(--border);
+}
+.skill-col:last-child { border-right: none; }
+
+.skill-col-hd {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--b-red);
+}
+.skill-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.skill-list li {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  padding-left: 13px;
+  border-left: 1px solid var(--faint);
+  line-height: 1.5;
+  transition: border-left-color 0.2s, color 0.2s;
+}
+.skill-list li:hover { border-left-color: var(--blue2); color: var(--cream); }
+
+/* ═══════════════════════════════════════════════
+   TIMELINE / JOURNEY
+═══════════════════════════════════════════════ */
+#timeline { background: var(--bg2); }
+
+.tl-list { margin-top: 4px; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 52px;
+  padding: 34px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+  transition: background 0.2s;
+}
+.tl-item:last-child { border-bottom: 1px solid var(--border); }
+.tl-item:hover { background: rgba(196,26,0,0.03); }
+
+.tl-era {
+  font-family: var(--condensed);
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding-top: 3px;
+}
+.tl-body h3 {
+  font-family: var(--condensed);
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.tl-body p {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.82;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+#contact { position: relative; overflow: hidden; }
+
+/* Big star BG in contact */
+.contact-star-bg {
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  transform: translateY(-50%);
+  width: min(55vw, 550px);
+  pointer-events: none;
+  opacity: 0.05;
+}
+
+.contact-big {
+  font-family: var(--condensed);
+  font-size: clamp(70px, 10vw, 148px);
+  line-height: 0.88;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 1;
+}
+.contact-big .ol { -webkit-text-stroke: 1.5px var(--cream); color: transparent; }
+.contact-big .red { color: var(--red); }
+
+.contact-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.contact-desc strong { color: var(--cream); font-weight:500; }
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s, border-left 0.2s;
+  border-left: 2px solid transparent;
+}
+.contact-link:hover {
+  background: var(--red-dim);
+  color: var(--red);
+  border-left-color: var(--red);
+}
+.contact-link svg { width:14px; height:14px; opacity:0.4; transition: opacity 0.2s, transform 0.2s; }
+.contact-link:hover svg { opacity:1; transform: translate(2px,-2px); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  padding: 24px 52px;
+  border-top: 1px solid var(--b-red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-star { width:18px; height:18px; opacity:0.2; }
+
+/* ═══════════════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(.16,1,.3,1),
+              transform 0.75s cubic-bezier(.16,1,.3,1);
+}
+.reveal.vis { opacity:1; transform:none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.18s}
+.d3{transition-delay:.28s} .d4{transition-delay:.38s}
+.d5{transition-delay:.48s} .d6{transition-delay:.58s}
+
+/* Glitch blink on headings */
+@keyframes glitch {
+  0%,90%,100% { opacity:1; clip-path:none; }
+  91% { opacity:0.8; clip-path:inset(20% 0 60% 0); transform:translateX(-3px); }
+  93% { opacity:1; clip-path:inset(60% 0 20% 0); transform:translateX(3px); }
+  95% { opacity:1; clip-path:none; transform:none; }
+}
+.hero-h1 { animation: glitch 7s steps(1) infinite; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:1100px){
+  .proj-grid { grid-template-columns:repeat(2,1fr); }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+  .about-grid { grid-template-columns:1fr; }
+  .about-big-q { position:static; }
+  .contact-cols { grid-template-columns:1fr; }
+}
+@media(max-width:640px){
+  .section { padding:60px 24px; }
+  nav#nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  #hero { padding:80px 24px 0; }
+  .hero-corner { display:none; }
+  .proj-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr; }
+  .skill-col { border-right:none; border-bottom:1px solid var(--border); }
+  .tl-item { grid-template-columns:1fr; gap:8px; }
+  footer { flex-direction:column; gap:10px; text-align:center; }
+  .contact-star-bg { display:none; }
+}
   </style>
 </head>
 <body>
-<div class="page">
-  <div class="page-inner">
-    <header>
-      <div class="logo">
-        <div class="logo-orb"></div>
-        <div>
-          <div class="logo-text-main">TEREKOPF.TECH</div>
-          <div class="logo-text-sub">AI · Neurotech · Product</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#about"><span class="dot"></span>About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#timeline">Journey</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-main">
-          <div class="hero-badge">
-            <span class="hero-badge-pill">Building systems of the future</span>
-            <span>Immersive tech · AI · product</span>
-          </div>
-          <h1 class="hero-title">
-            Stan <span class="grad">Terekopf</span>
-          </h1>
-          <p class="hero-subtitle">
-            AI & neurotech-driven product builder crafting systems where
-            <strong>trading intelligence</strong>, <strong>immersive experience</strong>,
-            and <strong>real-world usability</strong> meet. From multi-layered Forex
-            assistants to recording and replaying human emotion.
-          </p>
-          <div class="hero-tags">
-            <span class="tag">AI Forex Systems</span>
-            <span class="tag">BCI & Immersive Reality</span>
-            <span class="tag">iOS & Web Products</span>
-            <span class="tag">Creative Coding & Audio</span>
-          </div>
-          <div class="hero-actions">
-            <a href="#projects" class="btn-primary">
-              View featured projects
-              <span>↘</span>
-            </a>
-            <a href="#contact" class="btn-ghost">
-              Open to collaboration
-            </a>
-          </div>
-        </div>
+<!-- ── OVERLAYS ───────────────────────────────── -->
+<div class="vignette"></div>
+<div class="scanlines"></div>
 
-        <aside class="hero-side">
-          <div class="card">
-            <div class="card-title">Snapshot</div>
-            <div class="card-body">
-              Immigrant in Los Angeles, building technology that helps people
-              <strong>navigate complex systems</strong>: markets, bureaucracy, and
-              their own emotional experience.
-              <div class="pill-row">
-                <span class="pill accent">LA · PST</span>
-                <span class="pill">Product & systems thinking</span>
-                <span class="pill">Hands-on with code</span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Current focus</div>
-            <div class="card-body">
-              • AIA Forex System – self-learning assistant on top of MetaTrader 5
-              • NeuroSync / Senceteck – recording & replaying subjective experience
-              • EmotionSync – iOS app turning emotion into a shareable format (.EXP)
-              <div class="pill-row">
-                <span class="pill">Python · FastAPI</span>
-                <span class="pill">Next.js</span>
-                <span class="pill">SwiftUI</span>
-                <span class="pill">Gemini API · ML</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </section>
+<!-- ═══════════════════════════════════════════
+     PRELOADER
+═══════════════════════════════════════════ -->
+<div id="loader">
+  <!-- Animated Star of David drawing -->
+  <div class="loader-star-wrap">
+    <svg class="loader-star-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- Triangle up (blue) -->
+      <polygon class="tri-up"
+        points="200,20 375,320 25,320"/>
+      <!-- Triangle down (red) -->
+      <polygon class="tri-down"
+        points="200,380 25,80 375,80"/>
+      <!-- Inner hexagon -->
+      <polygon class="hex-inner"
+        points="200,107 269,147 269,227 200,267 131,227 131,147"/>
+      <!-- Outer ring detail lines -->
+      <line x1="200" y1="20" x2="200" y2="107" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2s" fill="freeze"/>
+      </line>
+      <line x1="375" y1="80" x2="269" y2="147" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.2s" fill="freeze"/>
+      </line>
+      <line x1="375" y1="320" x2="269" y2="227" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.4s" fill="freeze"/>
+      </line>
+      <line x1="200" y1="380" x2="200" y2="267" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.6s" fill="freeze"/>
+      </line>
+      <line x1="25" y1="320" x2="131" y2="227" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.8s" fill="freeze"/>
+      </line>
+      <line x1="25" y1="80" x2="131" y2="147" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
+        stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="3s" fill="freeze"/>
+      </line>
+    </svg>
+  </div>
 
-      <!-- ABOUT -->
-      <section id="about">
-        <div class="section-header">
-          <div class="section-title">About</div>
-          <div class="section-sub">
-            From survival in a new country to building long-term systems.
-          </div>
-        </div>
-        <div class="section-card">
-          <p class="about-text">
-            I’m Stan, a product-minded technologist working at the intersection of
-            <strong>AI, neurotech, and human experience</strong>. I like taking messy
-            realities – financial markets, government services, emotional states – and
-            turning them into <strong>clear, structured systems</strong>.
-          </p>
-          <p class="about-text">
-            My background is a mix of law, technology, and creative work: I’ve designed
-            <strong>trading assistants</strong>, built <strong>event platforms</strong>,
-            explored <strong>immersive emotional media</strong>, and created
-            <strong>“clarity as a service”</strong> concepts for immigrants and locals
-            trying to navigate life in the US.
-          </p>
-          <p class="about-text">
-            I care about <strong>real-world usefulness</strong>: tools that
-            actually help people decide, act, and feel better – not just another
-            dashboard.
-          </p>
-          <div class="about-meta">
-            <div class="about-meta-item">Based in Los Angeles</div>
-            <div class="about-meta-item">Open to remote & hybrid roles</div>
-            <div class="about-meta-item">English · Russian</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects">
-        <div class="section-header">
-          <div class="section-title">Featured Projects</div>
-          <div class="section-sub">
-            A selection of systems and experiments that shaped my thinking.
-          </div>
-        </div>
-        <div class="projects-grid">
-          <!-- AIA Forex System -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">AIA Forex System</span>
-              <span class="project-tag">AI trading assistant · MT5</span>
-            </div>
-            <div class="project-title">Multi-layered Forex AI with risk brain</div>
-            <div class="project-desc">
-              A “Jarvis-style” assistant built on MetaTrader 5: real-time data ingestion,
-              feature builder, probabilistic forecasts, and a strict risk policy
-              (R-based sizing, loss limits, observe-only modes) wrapped in a FastAPI
-              backend and React UI.
-            </div>
-            <div class="project-meta">
-              <span>Python · FastAPI</span>
-              <span>MetaTrader5 API</span>
-              <span>ML & risk models</span>
-            </div>
-          </article>
-
-          <!-- NeuroSync / Senceteck -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">NeuroSync / Senceteck</span>
-              <span class="project-tag">Immersive Reality · BCI</span>
-            </div>
-            <div class="project-title">Recording & replaying subjective experience</div>
-            <div class="project-desc">
-              Concept and architecture for a system that captures multi-modal streams
-              (EEG/BCI, biometrics, video, audio) into a structured <strong>.EXP</strong>
-              format. Focus on synchronisation, emotional interpretation and safe
-              replay of lived experiences.
-            </div>
-            <div class="project-meta">
-              <span>BCI · EEG</span>
-              <span>Python services</span>
-              <span>Experience file format</span>
-            </div>
-          </article>
-
-          <!-- EmotionSync -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">EmotionSync</span>
-              <span class="project-tag">iOS app · IR</span>
-            </div>
-            <div class="project-title">Global Emotion Map & emotional library</div>
-            <div class="project-desc">
-              iOS prototype that lets users record emotional episodes, analyse them
-              with AI (video, audio, face/emotion tracking) and place them on a global
-              map. Includes emotion library with previews and an interpreter that
-              packs everything into .EXP.
-            </div>
-            <div class="project-meta">
-              <span>SwiftUI</span>
-              <span>Gemini API</span>
-              <span>MediaPipe · JSON pipelines</span>
-            </div>
-          </article>
-
-          <!-- Events -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">Events</span>
-              <span class="project-tag">iOS + Web</span>
-            </div>
-            <div class="project-title">Event platform with map & tickets</div>
-            <div class="project-desc">
-              Mobile-first app and web version where people can discover, create,
-              and register for events. Features interactive map, advanced filters,
-              ticket logic, and a chat-like experience for organisers and attendees.
-            </div>
-            <div class="project-meta">
-              <span>SwiftUI · MapKit</span>
-              <span>React SPA</span>
-              <span>FastAPI backend</span>
-            </div>
-          </article>
-
-          <!-- Etraxism / Civic clarity -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">Etraxism</span>
-              <span class="project-tag">Clarity as a Service</span>
-            </div>
-            <div class="project-title">Practical guide to life in complex systems</div>
-            <div class="project-desc">
-              Concept for a multi-language platform that explains documents, medical
-              services, taxes, immigration and more in simple language – especially
-              for immigrants. Mix of content, guided flows, and AI-assisted navigation.
-            </div>
-            <div class="project-meta">
-              <span>Next.js</span>
-              <span>Content systems</span>
-              <span>Service design</span>
-            </div>
-          </article>
-
-          <!-- Music & Audio -->
-          <article class="project-card">
-            <div class="project-chip-row">
-              <span class="project-chip">Music & Audio</span>
-              <span class="project-tag">Creative</span>
-            </div>
-            <div class="project-title">Exploring emotion through sound</div>
-            <div class="project-desc">
-              Vocal processing experiments (from phonk to industrial), beat production,
-              and sound design. Treating audio as another interface to subjective
-              experience and emotional states.
-            </div>
-            <div class="project-meta">
-              <span>Ableton Live</span>
-              <span>Waves · FabFilter</span>
-              <span>Conceptual sound design</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills">
-        <div class="section-header">
-          <div class="section-title">Skills & Stack</div>
-          <div class="section-sub">
-            Capable of going from concept and architecture to working prototype.
-          </div>
-        </div>
-        <div class="section-card">
-          <div class="skills-grid">
-            <div>
-              <div class="skills-card-title">Engineering</div>
-              <div class="skills-list">
-                <span>Python · FastAPI</span>
-                <span>MetaTrader5 API</span>
-                <span>REST APIs</span>
-                <span>Streamlit</span>
-                <span>Git · CI basics</span>
-              </div>
-            </div>
-            <div>
-              <div class="skills-card-title">AI & Data</div>
-              <div class="skills-list">
-                <span>Time-series features</span>
-                <span>Risk-based metrics (R)</span>
-                <span>Model training pipelines</span>
-                <span>Knowledge extraction</span>
-                <span>Media analysis (video/audio)</span>
-              </div>
-            </div>
-            <div>
-              <div class="skills-card-title">Product & UX</div>
-              <div class="skills-list">
-                <span>System & product thinking</span>
-                <span>Prototyping</span>
-                <span>Information architecture</span>
-                <span>Spec writing</span>
-                <span>Hybrid online/offline flows</span>
-              </div>
-            </div>
-            <div>
-              <div class="skills-card-title">Platforms</div>
-              <div class="skills-list">
-                <span>Next.js · React</span>
-                <span>SwiftUI · iOS</span>
-                <span>Map-based UIs</span>
-                <span>Analytics & logging</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TIMELINE -->
-      <section id="timeline">
-        <div class="section-header">
-          <div class="section-title">Journey</div>
-          <div class="section-sub">
-            Not a straight line – more like a systems graph.
-          </div>
-        </div>
-        <div class="section-card">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-year">Earlier</div>
-              <div class="timeline-text">
-                Legal and analytical background, interest in how rules and systems
-                shape real life. First experiments with technology, automation,
-                and music production.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">Moving to LA</div>
-              <div class="timeline-text">
-                Immigration, starting from scratch, learning how the US works from
-                the inside. Day jobs plus night projects in trading, apps, and
-                clarity tools for other people in the same situation.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">Deep into AI</div>
-              <div class="timeline-text">
-                Building AIA Forex System, exploring self-training, risk policies,
-                feature builders, and orchestration layers. Designing infrastructure
-                that behaves more like a disciplined co-trader than a bot.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">Immersive Reality</div>
-              <div class="timeline-text">
-                Senceteck, NeuroSync, and EmotionSync: shifting from “how markets
-                move” to “how humans experience reality”. Architecting .EXP as a
-                potential new medium for sharing subjective experience.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-year">Now</div>
-              <div class="timeline-text">
-                Combining everything into a single direction: <strong>systems that
-                give people clarity and agency</strong>, whether they trade, move
-                countries, or explore new emotional states. Open to roles and
-                collaborations where this mindset is useful.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <div class="section-header">
-          <div class="section-title">Contact</div>
-          <div class="section-sub">
-            For roles, collaborations, or deep-tech experiments.
-          </div>
-        </div>
-        <div class="section-card">
-          <div class="contact-row">
-            <div class="contact-main">
-              Best way to reach me is by email. I’m especially interested in
-              <strong>AI-first product roles</strong>, <strong>deep-tech collaborations</strong>,
-              and <strong>experimental projects</strong> around trading, neurotech,
-              or immersive media.
-            </div>
-            <div class="contact-links">
-              <!-- Замени email и ссылки на свои -->
-              <a class="contact-pill" href="mailto:legatoice@gmail.com">
-                ✉ legatoice@gmail.com
-              </a>
-              <a class="contact-pill" href="#" target="_blank" rel="https://github.com/StanislavTerekhov">
-                GitHub
-              </a>
-              <a class="contact-pill" href="#" target="_blank" rel="https://www.linkedin.com/in/stanislav-terekhov-4ab069316/">
-                LinkedIn
-              </a>
-              <a class="contact-pill" href="#" target="_blank" rel="https://www.instagram.com/rocketbunnyproducer/">
-                instagram
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      © <span id="year"></span> Stanislav Terekhov · Built for a complex world.
-    </footer>
+  <div class="loader-bottom">
+    <div class="loader-count" id="loaderNum">000</div>
+    <div class="loader-bar-row">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-label">TEREKHOV.TECH / INITIALIZING SIGNAL</div>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <!-- Magen David nav icon -->
+    <svg class="nav-logo-star" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="11,1 13.5,7.5 20.5,7.5 15,11.5 17.5,18 11,14 4.5,18 7,11.5 1.5,7.5 8.5,7.5"
+        fill="none" stroke="#C41A00" stroke-width="1.1"/>
+      <polygon points="11,21 8.5,14.5 1.5,14.5 7,10.5 4.5,4 11,8 17.5,4 15,10.5 20.5,14.5 13.5,14.5"
+        fill="none" stroke="#4D80FF" stroke-width="1.1" opacity="0.7"/>
+    </svg>
+    TEREKHOV<span>.TECH</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#timeline">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+
+  <!-- Giant Star of David background -->
+  <svg class="hero-star-bg" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon class="hero-tri-up" points="300,30 562,490 38,490"/>
+    <polygon class="hero-tri-down" points="300,570 38,110 562,110"/>
+    <polygon class="hero-hex" points="300,160 404,220 404,340 300,400 196,340 196,220"/>
+    <!-- Six radiating lines -->
+    <line x1="300" y1="30" x2="300" y2="160" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
+    <line x1="562" y1="110" x2="404" y2="220" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
+    <line x1="562" y1="490" x2="404" y2="340" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
+    <line x1="300" y1="570" x2="300" y2="400" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
+    <line x1="38" y1="490" x2="196" y2="340" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
+    <line x1="38" y1="110" x2="196" y2="220" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
+  </svg>
+
+  <!-- Scan line animation -->
+  <div class="hero-scanline"></div>
+
+  <!-- Corner labels -->
+  <div class="hero-corner hc-tl">01 / Portfolio</div>
+  <div class="hero-corner hc-tr">Los Angeles, CA — PST</div>
+
+  <!-- Bottom-left corner label -->
+  <div class="hero-corner hc-bl">AI · Neurotech · Product Builder</div>
+
+  <!-- Main content -->
+  <div class="hero-main reveal">
+    <h1 class="hero-h1">
+      <span class="line-solid">STANISLAV</span>
+      <span class="line-red">TEREKHOV</span>
+    </h1>
+    <p class="hero-sub">
+      Building systems where <strong>trading intelligence</strong>,
+      <strong>immersive experience</strong>, and
+      <strong>real-world usability</strong> converge — from Forex
+      AI to recording human emotion.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#projects" class="btn-red">
+        View Projects
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#contact" class="btn-ghost-red">Open to collaborate</a>
+    </div>
+  </div>
+
+  <div class="hero-stats reveal d2">
+    <div>
+      <div class="hero-stat-n">06</div>
+      <div class="hero-stat-l">Active Projects</div>
+    </div>
+    <div>
+      <div class="hero-stat-n">3+</div>
+      <div class="hero-stat-l">Years in AI</div>
+    </div>
+    <div>
+      <div class="hero-stat-n">LA</div>
+      <div class="hero-stat-l">Los Angeles</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="sec-label reveal">01 / About</div>
+  <div class="about-grid">
+
+    <div class="about-big-q reveal">
+      <div class="sec-title" style="margin-bottom:0">
+        WHO<br/>
+        <span class="red">I</span><br/>
+        <span class="outline">AM</span>
+      </div>
+
+      <div class="about-location" style="margin-top:28px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--muted)">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M6 1a3.5 3.5 0 0 1 3.5 3.5C9.5 7.5 6 11 6 11S2.5 7.5 2.5 4.5A3.5 3.5 0 0 1 6 1Z"
+            stroke="var(--red)" stroke-width="1"/>
+          <circle cx="6" cy="4.5" r="1.2" stroke="var(--red)" stroke-width="0.9"/>
+        </svg>
+        Los Angeles, CA — PST
+      </div>
+
+      <!-- Israeli flag stripes -->
+      <div class="flag-stripes">
+        <span class="fs-blue"></span>
+        <span class="fs-gap"></span>
+        <span class="fs-blue"></span>
+      </div>
+
+      <!-- Magen David decoration -->
+      <svg class="about-star-deco" viewBox="0 0 54 54" fill="none">
+        <polygon points="27,3 33,19 50,19 36,29 42,45 27,35 12,45 18,29 4,19 21,19"
+          fill="none" stroke="var(--red)" stroke-width="1.2"/>
+        <polygon points="27,51 21,35 4,35 18,25 12,9 27,19 42,9 36,25 50,35 33,35"
+          fill="none" stroke="var(--blue2)" stroke-width="1.2" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="about-body reveal d2">
+      <p>
+        I'm Stan — a product-minded technologist at the intersection of
+        <strong>AI, neurotech, and human experience</strong>. My background
+        blends law, technology, and creative work: an unusual combination
+        that forces systems-level thinking over feature lists.
+      </p>
+      <p>
+        I've built <strong>trading assistants</strong> that behave like
+        disciplined co-traders, designed <strong>event platforms</strong>,
+        explored <strong>immersive emotional media</strong> with BCI hardware,
+        and created <strong>clarity-as-a-service</strong> tools for people
+        navigating life in a new country.
+      </p>
+      <p>
+        My north star is <strong>real-world usefulness</strong>: tools that
+        actually help people decide, act, and feel better.
+      </p>
+      <div class="about-chips">
+        <span class="about-chip">Product Thinking</span>
+        <span class="about-chip">Python · FastAPI</span>
+        <span class="about-chip">SwiftUI · iOS</span>
+        <span class="about-chip">Next.js · React</span>
+        <span class="about-chip">AI / ML Systems</span>
+        <span class="about-chip">EN · RU</span>
+        <span class="about-chip">Remote & Hybrid</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PROJECTS
+═══════════════════════════════════════════ -->
+<section id="projects" class="section">
+  <div class="proj-header reveal">
+    <div>
+      <div class="sec-label">02 / Featured Work</div>
+      <h2 class="sec-title" style="margin-bottom:0">
+        FEATURED<br/><span class="outline">PROJECTS</span>
+      </h2>
+    </div>
+    <p class="proj-header-sub">Systems and experiments that shaped how I build.</p>
+  </div>
+
+  <!-- Reusable Star of David SVG for cards -->
+  <div id="card-star-tpl" style="display:none">
+    <svg viewBox="0 0 90 90" fill="none">
+      <polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32"
+        fill="none" stroke="var(--blue2)" stroke-width="1.5"/>
+      <polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58"
+        fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="proj-grid">
+
+    <article class="proj-card reveal d1">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">01</div>
+      <div class="pcard-cat">AI Trading · MT5</div>
+      <h3 class="pcard-title">AIA Forex System</h3>
+      <p class="pcard-desc">
+        Jarvis-style assistant on MetaTrader 5: real-time data ingestion,
+        probabilistic forecasts, R-based sizing, loss limits, observe-only modes.
+        FastAPI + React UI.
+      </p>
+      <div class="pcard-tech">
+        <span>Python</span><span>FastAPI</span><span>MT5 API</span><span>ML</span>
+      </div>
+    </article>
+
+    <article class="proj-card reveal d2">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">02</div>
+      <div class="pcard-cat">Neurotech · BCI</div>
+      <h3 class="pcard-title">NeuroSync / Senceteck</h3>
+      <p class="pcard-desc">
+        Architecture for capturing multi-modal streams — EEG, biometrics,
+        video, audio — into a structured .EXP format. Safe replay of
+        lived subjective experiences.
+      </p>
+      <div class="pcard-tech">
+        <span>BCI · EEG</span><span>Python</span><span>.EXP Format</span>
+      </div>
+    </article>
+
+    <article class="proj-card reveal d3">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">03</div>
+      <div class="pcard-cat">iOS · AI</div>
+      <h3 class="pcard-title">EmotionSync</h3>
+      <p class="pcard-desc">
+        iOS prototype to record emotional episodes, analyse with AI
+        (video, audio, face tracking) and place on a global emotion map.
+        Exports .EXP files.
+      </p>
+      <div class="pcard-tech">
+        <span>SwiftUI</span><span>Gemini API</span><span>MediaPipe</span>
+      </div>
+    </article>
+
+    <article class="proj-card reveal d4">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">04</div>
+      <div class="pcard-cat">iOS · Web</div>
+      <h3 class="pcard-title">Events Platform</h3>
+      <p class="pcard-desc">
+        Mobile-first app + web version: discover, create, register for events.
+        Interactive map, advanced filters, ticket logic, organiser
+        & attendee flows.
+      </p>
+      <div class="pcard-tech">
+        <span>SwiftUI · MapKit</span><span>React SPA</span><span>FastAPI</span>
+      </div>
+    </article>
+
+    <article class="proj-card reveal d5">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">05</div>
+      <div class="pcard-cat">Civic · Service Design</div>
+      <h3 class="pcard-title">Etraxism</h3>
+      <p class="pcard-desc">
+        Multi-language platform explaining documents, medical, taxes,
+        immigration in plain language — especially for immigrants.
+        AI-assisted navigation.
+      </p>
+      <div class="pcard-tech">
+        <span>Next.js</span><span>Content Systems</span><span>Service Design</span>
+      </div>
+    </article>
+
+    <article class="proj-card reveal d6">
+      <div class="pcard-star">
+        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+      <div class="pcard-num">06</div>
+      <div class="pcard-cat">Music · Audio</div>
+      <h3 class="pcard-title">Sound Design</h3>
+      <p class="pcard-desc">
+        Vocal processing experiments from phonk to industrial, beat production,
+        sound design. Audio as another interface to subjective
+        experience and emotional states.
+      </p>
+      <div class="pcard-tech">
+        <span>Ableton Live</span><span>Waves · FabFilter</span><span>Creative Coding</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════════ -->
+<section id="skills" class="section">
+  <div class="sec-label reveal">03 / Stack</div>
+  <h2 class="sec-title reveal d1">STACK &<br/><span class="outline">CAPABILITIES</span></h2>
+
+  <div class="skills-grid">
+    <div class="skill-col reveal d1">
+      <div class="skill-col-hd">Engineering</div>
+      <ul class="skill-list">
+        <li>Python · FastAPI</li>
+        <li>MetaTrader5 API</li>
+        <li>REST API design</li>
+        <li>Streamlit dashboards</li>
+        <li>Git · CI basics</li>
+      </ul>
+    </div>
+    <div class="skill-col reveal d2">
+      <div class="skill-col-hd">AI & Data</div>
+      <ul class="skill-list">
+        <li>Time-series features</li>
+        <li>Risk-based metrics (R)</li>
+        <li>Model training pipelines</li>
+        <li>Knowledge extraction</li>
+        <li>Video / audio analysis</li>
+      </ul>
+    </div>
+    <div class="skill-col reveal d3">
+      <div class="skill-col-hd">Product & UX</div>
+      <ul class="skill-list">
+        <li>Systems thinking</li>
+        <li>Rapid prototyping</li>
+        <li>Information architecture</li>
+        <li>Spec writing</li>
+        <li>Hybrid offline flows</li>
+      </ul>
+    </div>
+    <div class="skill-col reveal d4">
+      <div class="skill-col-hd">Platforms</div>
+      <ul class="skill-list">
+        <li>Next.js · React</li>
+        <li>SwiftUI · iOS</li>
+        <li>Map-based UIs</li>
+        <li>Analytics & logging</li>
+        <li>Gemini API · ML APIs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TIMELINE
+═══════════════════════════════════════════ -->
+<section id="timeline" class="section">
+  <div class="sec-label reveal">04 / Journey</div>
+  <h2 class="sec-title reveal d1">
+    NOT A<br/>STRAIGHT<br/><span class="red">LINE</span>
+  </h2>
+
+  <div class="tl-list">
+    <div class="tl-item reveal d1">
+      <div class="tl-era">Earlier</div>
+      <div class="tl-body">
+        <h3>Law, Analysis & First Experiments</h3>
+        <p>Legal and analytical background — studying how rules and institutions shape real life.
+           First experiments with technology, automation, and music production.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal d2">
+      <div class="tl-era">Moving to LA</div>
+      <div class="tl-body">
+        <h3>Immigration — A New System from the Inside</h3>
+        <p>Starting from scratch. Day jobs plus night projects in trading, apps, and
+           clarity tools for others navigating the same complexity.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal d3">
+      <div class="tl-era">Deep into AI</div>
+      <div class="tl-body">
+        <h3>AIA — A Disciplined Co-Trader, Not a Bot</h3>
+        <p>Exploring self-training architectures, risk policies, feature builders, and
+           orchestration layers for Forex intelligence.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal d4">
+      <div class="tl-era">Immersive Reality</div>
+      <div class="tl-body">
+        <h3>Senceteck · NeuroSync · EmotionSync</h3>
+        <p>Shifting from "how markets move" to "how humans experience reality".
+           Architecting .EXP as a new medium for sharing subjective experience.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal d5">
+      <div class="tl-era">Now</div>
+      <div class="tl-body">
+        <h3>Systems That Give People Clarity and Agency</h3>
+        <p>Combining everything into one direction — tools that help people trade,
+           move countries, or explore new emotional states. Open to roles and
+           collaborations where this mindset is useful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
+<section id="contact" class="section">
+
+  <!-- Big star background -->
+  <svg class="contact-star-bg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="250,25 295,160 435,160 323,245 368,380 250,295 132,380 177,245 65,160 205,160"
+      fill="none" stroke="var(--red)" stroke-width="1"/>
+    <polygon points="250,475 205,340 65,340 177,255 132,120 250,205 368,120 323,255 435,340 295,340"
+      fill="none" stroke="var(--blue2)" stroke-width="1" opacity="0.6"/>
+    <polygon points="250,160 316,200 316,280 250,320 184,280 184,200"
+      fill="none" stroke="var(--blue2)" stroke-width="0.5" opacity="0.3"/>
+  </svg>
+
+  <div class="sec-label reveal">05 / Contact</div>
+
+  <div class="contact-big reveal d1">
+    LET'S<br/>
+    <span class="ol">BUILD</span><br/>
+    <span class="red">REAL.</span>
+  </div>
+
+  <div class="contact-cols">
+    <div class="contact-desc reveal d2">
+      Especially interested in <strong>AI-first product roles</strong>,
+      <strong>deep-tech collaborations</strong>, and
+      <strong>experimental projects</strong> around trading,
+      neurotech, or immersive media.<br/><br/>
+      Best way to reach me is by email.
+    </div>
+    <div class="reveal d3">
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:legatoice@gmail.com">
+          <span>✉ legatoice@gmail.com</span>
+          <svg viewBox="0 0 14 14" fill="none">
+            <path d="M2 12 12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="contact-link" href="https://github.com/StanislavTerekhov" target="_blank" rel="noopener">
+          <span>GitHub — StanislavTerekhov</span>
+          <svg viewBox="0 0 14 14" fill="none">
+            <path d="M2 12 12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/stanislav-terekhov-4ab069316/" target="_blank" rel="noopener">
+          <span>LinkedIn</span>
+          <svg viewBox="0 0 14 14" fill="none">
+            <path d="M2 12 12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="contact-link" href="https://www.instagram.com/rocketbunnyproducer/" target="_blank" rel="noopener">
+          <span>Instagram — @rocketbunnyproducer</span>
+          <svg viewBox="0 0 14 14" fill="none">
+            <path d="M2 12 12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <span>© <span id="yr"></span> Stanislav Terekhov</span>
+  <svg class="footer-star" viewBox="0 0 20 20" fill="none">
+    <polygon points="10,1 12,7 18.5,7 13.5,11 15.5,17 10,13 4.5,17 6.5,11 1.5,7 8,7"
+      fill="none" stroke="var(--red)" stroke-width="1"/>
+    <polygon points="10,19 8,13 1.5,13 6.5,9 4.5,3 10,7 15.5,3 13.5,9 18.5,13 12,13"
+      fill="none" stroke="var(--blue2)" stroke-width="1" opacity="0.6"/>
+  </svg>
+  <span>TEREKHOV.TECH / AI · NEUROTECH · PRODUCT</span>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* ── PRELOADER ─────────────────────────────── */
+(function(){
+  const numEl  = document.getElementById('loaderNum');
+  const barEl  = document.getElementById('loaderBar');
+  const loader = document.getElementById('loader');
+  let pct = 0;
+
+  // Block scroll
+  document.body.style.overflow = 'hidden';
+
+  const tick = setInterval(() => {
+    // Realistic fast-then-slow-then-burst curve
+    const step = pct < 40 ? Math.ceil(Math.random()*6+2)
+               : pct < 80 ? Math.ceil(Math.random()*4+1)
+               : pct < 95 ? Math.ceil(Math.random()*2+0.5)
+               :             Math.ceil(Math.random()*8+3);
+    pct = Math.min(pct + step, 100);
+
+    numEl.textContent = String(pct).padStart(3,'0');
+    barEl.style.width = pct + '%';
+
+    if(pct >= 100){
+      clearInterval(tick);
+      setTimeout(() => {
+        loader.classList.add('out');
+        document.body.style.overflow = '';
+        // Reveal hero elements
+        document.querySelectorAll('#hero .reveal').forEach(r => r.classList.add('vis'));
+      }, 500);
+    }
+  }, 40);
+})();
+
+/* ── NAV SCROLL ────────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+}, {passive:true});
+
+/* ── INTERSECTION REVEAL ───────────────────── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal:not(#hero .reveal)').forEach(el => io.observe(el));
+
+/* ── FOOTER YEAR ───────────────────────────── */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── GLITCH TEXT SCRAMBLE on hero title ────── */
+(function(){
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\|!@#$%';
+  const lines = [
+    { el: document.querySelector('.line-solid'), original: 'STANISLAV' },
+    { el: document.querySelector('.line-red'),   original: 'TEREKHOV' },
+  ];
+
+  function scramble(el, original, duration){
+    let start = null;
+    function step(ts){
+      if(!start) start = ts;
+      const progress = (ts - start) / duration;
+      if(progress >= 1){ el.textContent = original; return; }
+      const revealedLen = Math.floor(progress * original.length);
+      let text = original.slice(0, revealedLen);
+      for(let i = revealedLen; i < original.length; i++){
+        text += chars[Math.floor(Math.random() * chars.length)];
+      }
+      el.textContent = text;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Run scramble after loader finishes
+  document.getElementById('loader').addEventListener('transitionend', () => {
+    lines.forEach((l, i) => {
+      if(l.el) setTimeout(() => scramble(l.el, l.original, 700), i * 120);
+    });
+  });
+})();
 </script>
 </body>
 </html>
