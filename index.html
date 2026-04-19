@@ -7,7 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.4/dist/ScrollTrigger.min.js"></script>
   <style>
+
 /* ═══════════════════════════════════════════════
    TOKENS
 ═══════════════════════════════════════════════ */
@@ -70,50 +74,6 @@ a { color:inherit; text-decoration:none; }
 }
 #loader.out { opacity:0; visibility:hidden; }
 
-/* Animated Star of David in loader bg */
-.loader-star-wrap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 6vw;
-  pointer-events: none;
-}
-.loader-star-svg {
-  width: min(55vw, 560px);
-  height: min(55vw, 560px);
-}
-
-/* Triangle paths with stroke-dashoffset animation */
-.tri-up {
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 0.8;
-  opacity: 0.28;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawStroke 2.4s cubic-bezier(.4,0,.2,1) 0.3s forwards;
-}
-.tri-down {
-  fill: none;
-  stroke: var(--red);
-  stroke-width: 0.8;
-  opacity: 0.2;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawStroke 2.4s cubic-bezier(.4,0,.2,1) 0.9s forwards;
-}
-.hex-inner {
-  fill: none;
-  stroke: var(--blue2);
-  stroke-width: 0.4;
-  opacity: 0.12;
-  stroke-dasharray: 800;
-  stroke-dashoffset: 800;
-  animation: drawStroke 2s ease 1.5s forwards;
-}
-@keyframes drawStroke { to { stroke-dashoffset: 0; } }
 
 .loader-bottom { margin-top: auto; }
 
@@ -184,9 +144,6 @@ nav#nav.scrolled {
   align-items: center;
   gap: 10px;
 }
-.nav-logo-star {
-  width: 24px; height: 28px;
-}
 .nav-logo span { color: var(--red); }
 
 .nav-links {
@@ -223,29 +180,6 @@ nav#nav.scrolled {
   overflow: hidden;
 }
 
-/* Hero big Star of David background */
-.hero-star-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(88vh, 780px);
-  pointer-events: none;
-  opacity: 0;
-  animation: heroStarIn 1.2s ease 0.3s forwards;
-}
-@keyframes heroStarIn {
-  to { opacity: 1; }
-}
-.hero-tri-up {
-  fill:none; stroke: var(--blue); stroke-width: 0.6; opacity:0.09;
-}
-.hero-tri-down {
-  fill:none; stroke: var(--red); stroke-width: 0.6; opacity:0.06;
-}
-.hero-hex {
-  fill:none; stroke:var(--blue2); stroke-width:0.3; opacity:0.06;
-}
 
 /* Moving scan line */
 .hero-scanline {
@@ -482,12 +416,6 @@ nav#nav.scrolled {
 .fs-blue { background: var(--blue-flag); width: 100%; opacity: 0.65; }
 .fs-gap  { background: transparent; height: 8px; }
 
-/* Star of David decorative */
-.about-star-deco {
-  width: 54px; height: 54px;
-  margin-top: 32px;
-  opacity: 0.15;
-}
 
 .about-body p {
   font-size: 15px;
@@ -566,16 +494,6 @@ nav#nav.scrolled {
 .proj-card:hover::after { transform: scaleX(1); }
 .proj-card:hover { background: rgba(196,26,0,0.05); }
 
-/* Magen David watermark per card */
-.pcard-star {
-  position: absolute;
-  bottom: -16px; right: -16px;
-  width: 90px; height: 90px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.proj-card:hover .pcard-star { opacity: 0.07; }
 
 .pcard-num {
   font-family: var(--mono);
@@ -842,6 +760,7 @@ footer {
 </head>
 <body>
 
+
 <!-- ── OVERLAYS ───────────────────────────────── -->
 <div class="vignette"></div>
 <div class="scanlines"></div>
@@ -850,45 +769,6 @@ footer {
      PRELOADER
 ═══════════════════════════════════════════ -->
 <div id="loader">
-  <!-- Animated Star of David drawing -->
-  <div class="loader-star-wrap">
-    <svg class="loader-star-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <!-- Triangle up (blue) -->
-      <polygon class="tri-up"
-        points="200,20 375,320 25,320"/>
-      <!-- Triangle down (red) -->
-      <polygon class="tri-down"
-        points="200,380 25,80 375,80"/>
-      <!-- Inner hexagon -->
-      <polygon class="hex-inner"
-        points="200,107 269,147 269,227 200,267 131,227 131,147"/>
-      <!-- Outer ring detail lines -->
-      <line x1="200" y1="20" x2="200" y2="107" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2s" fill="freeze"/>
-      </line>
-      <line x1="375" y1="80" x2="269" y2="147" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.2s" fill="freeze"/>
-      </line>
-      <line x1="375" y1="320" x2="269" y2="227" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.4s" fill="freeze"/>
-      </line>
-      <line x1="200" y1="380" x2="200" y2="267" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.6s" fill="freeze"/>
-      </line>
-      <line x1="25" y1="320" x2="131" y2="227" stroke="var(--red)" stroke-width="0.4" opacity="0.1"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="2.8s" fill="freeze"/>
-      </line>
-      <line x1="25" y1="80" x2="131" y2="147" stroke="var(--blue)" stroke-width="0.4" opacity="0.12"
-        stroke-dasharray="100" stroke-dashoffset="100">
-        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" begin="3s" fill="freeze"/>
-      </line>
-    </svg>
-  </div>
 
   <div class="loader-bottom">
     <div class="loader-count" id="loaderNum">000</div>
@@ -921,19 +801,6 @@ footer {
 ═══════════════════════════════════════════ -->
 <section id="hero">
 
-  <!-- Giant Star of David background -->
-  <svg class="hero-star-bg" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon class="hero-tri-up" points="300,30 562,490 38,490"/>
-    <polygon class="hero-tri-down" points="300,570 38,110 562,110"/>
-    <polygon class="hero-hex" points="300,160 404,220 404,340 300,400 196,340 196,220"/>
-    <!-- Six radiating lines -->
-    <line x1="300" y1="30" x2="300" y2="160" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
-    <line x1="562" y1="110" x2="404" y2="220" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
-    <line x1="562" y1="490" x2="404" y2="340" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
-    <line x1="300" y1="570" x2="300" y2="400" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
-    <line x1="38" y1="490" x2="196" y2="340" stroke="var(--red)" stroke-width="0.4" opacity="0.06"/>
-    <line x1="38" y1="110" x2="196" y2="220" stroke="var(--blue2)" stroke-width="0.4" opacity="0.08"/>
-  </svg>
 
   <!-- Scan line animation -->
   <div class="hero-scanline"></div>
@@ -1016,13 +883,6 @@ footer {
         <span class="fs-blue"></span>
       </div>
 
-      <!-- Magen David decoration -->
-      <svg class="about-star-deco" viewBox="0 0 54 54" fill="none">
-        <polygon points="27,3 33,19 50,19 36,29 42,45 27,35 12,45 18,29 4,19 21,19"
-          fill="none" stroke="var(--red)" stroke-width="1.2"/>
-        <polygon points="27,51 21,35 4,35 18,25 12,9 27,19 42,9 36,25 50,35 33,35"
-          fill="none" stroke="var(--blue2)" stroke-width="1.2" opacity="0.6"/>
-      </svg>
     </div>
 
     <div class="about-body reveal d2">
@@ -1083,9 +943,6 @@ footer {
   <div class="proj-grid">
 
     <article class="proj-card reveal d1">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">01</div>
       <div class="pcard-cat">AI Trading · MT5</div>
       <h3 class="pcard-title">AIA Forex System</h3>
@@ -1100,9 +957,6 @@ footer {
     </article>
 
     <article class="proj-card reveal d2">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">02</div>
       <div class="pcard-cat">Neurotech · BCI</div>
       <h3 class="pcard-title">NeuroSync / Senceteck</h3>
@@ -1117,9 +971,6 @@ footer {
     </article>
 
     <article class="proj-card reveal d3">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">03</div>
       <div class="pcard-cat">iOS · AI</div>
       <h3 class="pcard-title">EmotionSync</h3>
@@ -1134,9 +985,6 @@ footer {
     </article>
 
     <article class="proj-card reveal d4">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">04</div>
       <div class="pcard-cat">iOS · Web</div>
       <h3 class="pcard-title">Events Platform</h3>
@@ -1151,9 +999,6 @@ footer {
     </article>
 
     <article class="proj-card reveal d5">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">05</div>
       <div class="pcard-cat">Civic · Service Design</div>
       <h3 class="pcard-title">Etraxism</h3>
@@ -1168,9 +1013,6 @@ footer {
     </article>
 
     <article class="proj-card reveal d6">
-      <div class="pcard-star">
-        <svg viewBox="0 0 90 90" fill="none"><polygon points="45,5 55,32 83,32 62,50 70,77 45,60 20,77 28,50 7,32 35,32" fill="none" stroke="var(--blue2)" stroke-width="1.5"/><polygon points="45,85 35,58 7,58 28,40 20,13 45,30 70,13 62,40 83,58 55,58" fill="none" stroke="var(--red)" stroke-width="1.5" opacity="0.6"/></svg>
-      </div>
       <div class="pcard-num">06</div>
       <div class="pcard-cat">Music · Audio</div>
       <h3 class="pcard-title">Sound Design</h3>
@@ -1457,6 +1299,265 @@ document.getElementById('yr').textContent = new Date().getFullYear();
       if(l.el) setTimeout(() => scramble(l.el, l.original, 700), i * 120);
     });
   });
+})();
+</script>
+
+<!-- ── WebGL ANIMATION (Three.js + GSAP) ── -->
+<script>
+(function () {
+  'use strict';
+  if (!window.THREE) return;
+
+  // ── Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  Object.assign(renderer.domElement.style, {
+    position:'fixed', inset:'0', width:'100%', height:'100%',
+    pointerEvents:'none', zIndex:'0'
+  });
+  document.body.insertBefore(renderer.domElement, document.body.firstChild);
+
+  // ── Cameras
+  const camBg = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  let AR = innerWidth / innerHeight;
+  const camP = new THREE.OrthographicCamera(-AR, AR, 1, -1, 0, 10);
+  camP.position.z = 1;
+
+  // ── Scenes
+  const bgScene = new THREE.Scene();
+  const pScene  = new THREE.Scene();
+
+  // ── Background FBM noise shader
+  const bgU = {
+    uTime:    { value: 0 },
+    uSection: { value: 0 },
+    uMouse:   { value: new THREE.Vector2() }
+  };
+  bgScene.add(new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial({
+      uniforms: bgU,
+      vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position,1.);}',
+      fragmentShader: `
+        precision highp float;
+        varying vec2 vUv;
+        uniform float uTime,uSection;
+        uniform vec2 uMouse;
+
+        vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
+        vec4 mod289v4(vec4 x){return x-floor(x*(1./289.))*289.;}
+        vec3 perm3(vec3 x){return mod289v3(((x*34.)+10.)*x);}
+
+        float sn(vec2 v){
+          const vec4 C=vec4(.211324865,.366025404,-.577350269,.024390244);
+          vec2 i=floor(v+dot(v,C.yy)),x0=v-i+dot(i,C.xx);
+          vec2 i1=x0.x>x0.y?vec2(1.,0.):vec2(0.,1.);
+          vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;
+          i=mod289v3(vec3(i,0.)).xy;
+          vec3 p=perm3(perm3(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+          vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+          m*=m*m*m;
+          vec3 x2=2.*fract(p*.024390244)-1.,h=abs(x2)-.5,ox=floor(x2+.5),a0=x2-ox;
+          m*=1.79284291-.85373472*(a0*a0+h*h);
+          vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+          return 130.*dot(m,g);
+        }
+
+        float fbm(vec2 p){
+          float v=0.,a=.55;
+          for(int i=0;i<4;i++){v+=a*(.5+.5*sn(p));p=p*2.1+vec2(1.7,9.2);a*=.5;}
+          return v;
+        }
+
+        void main(){
+          vec2 uv=vUv;
+          float t=uTime*.09;
+          vec2 q=vec2(fbm(uv*2.+t*.4),fbm(uv*2.+vec2(5.2,1.3)+t*.35));
+          float f=fbm(uv*2.2+q*.7+t*.2);
+          float s=clamp(uSection/5.,0.,1.);
+          vec3 haze=mix(vec3(.04,.12,.44),vec3(.02,.05,.20),s);
+          vec3 col=vec3(.028,.027,.039)+haze*f*.26;
+          vec2 mUv=uMouse*.5+.5;
+          col+=haze*.12*exp(-length(uv-mUv)*4.5);
+          float v=uv.x*(1.-uv.x)*uv.y*(1.-uv.y);
+          col*=.38+.62*pow(clamp(v*16.,0.,1.),.3);
+          gl_FragColor=vec4(col,1.);
+        }
+      `,
+      depthTest: false
+    })
+  ));
+
+  // ── Particles
+  const N   = innerWidth < 640 ? 150 : 270;
+  const DPR = Math.min(devicePixelRatio, 2);
+  AR = innerWidth / innerHeight;
+  const px_ = new Float32Array(N), py_ = new Float32Array(N);
+  const pvx = new Float32Array(N), pvy = new Float32Array(N);
+  const ptx = new Float32Array(N), pty = new Float32Array(N);
+  const pe  = new Float32Array(N), pa  = new Float32Array(N);
+  const posA = new Float32Array(N*3), colA = new Float32Array(N*3);
+  const szA  = new Float32Array(N),   alA  = new Float32Array(N);
+
+  for (let i = 0; i < N; i++) {
+    px_[i] = (Math.random()-.5)*AR*2.2;
+    py_[i] = (Math.random()-.5)*2.2;
+    ptx[i] = px_[i]; pty[i] = py_[i];
+    pe[i]  = .016 + Math.random()*.03;
+    pa[i]  = .18  + Math.random()*.32;
+    szA[i] = (1.5 + Math.random()*3) * DPR;
+    const c = new THREE.Color().setHSL((210+Math.random()*45)/360, .62+Math.random()*.25, .44+Math.random()*.3);
+    colA[i*3]=c.r; colA[i*3+1]=c.g; colA[i*3+2]=c.b;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(posA, 3));
+  geo.setAttribute('aColor',   new THREE.BufferAttribute(colA, 3));
+  geo.setAttribute('aSize',    new THREE.BufferAttribute(szA,  1));
+  geo.setAttribute('aAlpha',   new THREE.BufferAttribute(alA,  1));
+
+  const pU = { uGlow: { value: 0 } };
+  pScene.add(new THREE.Points(geo, new THREE.ShaderMaterial({
+    uniforms: pU,
+    vertexShader:   `
+      attribute vec3 aColor;
+      attribute float aSize,aAlpha;
+      varying vec3 vCol;
+      varying float vA;
+      void main(){
+        vCol=aColor; vA=aAlpha;
+        gl_PointSize=aSize;
+        gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vCol;
+      varying float vA;
+      uniform float uGlow;
+      void main(){
+        vec2 uv=gl_PointCoord-.5;
+        float d=length(uv);
+        if(d>.5) discard;
+        float a=vA*(1.-smoothstep(.25,.5,d));
+        a+=uGlow*vA*.5*exp(-d*7.);
+        gl_FragColor=vec4(vCol,clamp(a,0.,1.));
+      }
+    `,
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending
+  })));
+
+  // ── Hand targets (in camera space of camP)
+  function handPts() {
+    AR = innerWidth / innerHeight;
+    const pts = [], s = AR * .36;
+    function fill(x,y,w,h,n){
+      for(let i=0;i<n;i++) pts.push([x+Math.random()*w, y+Math.random()*h]);
+    }
+    fill(-s, -.20, s*2, .40, 118);
+    const fL=[.30,.36,.42,.38,.38,.42,.36,.30];
+    for(let f=0;f<8;f++) fill(-s*.88+f*(s*1.76/7)-.019, .20, .040, fL[f], 12);
+    fill(-s*1.15,-.10,.040,.28,10);
+    fill( s*1.11,-.10,.040,.28,10);
+    return pts;
+  }
+
+  function scatter() {
+    AR = innerWidth / innerHeight;
+    for(let i=0;i<N;i++){ ptx[i]=(Math.random()-.5)*AR*2.2; pty[i]=(Math.random()-.5)*2.2; }
+  }
+
+  function assign(pts) {
+    for(let i=0;i<N;i++){ const t=pts[i%pts.length]; ptx[i]=t[0]; pty[i]=t[1]; }
+  }
+
+  // ── Phase cycle (12s)
+  const CYCLE = 12000;
+  let t0 = null, lastPh = '';
+  const eio = t => t<.5 ? 2*t*t : -1+(4-2*t)*t;
+
+  function phase(ct) {
+    if(ct <  1400) return ['drift',    ct/1400];
+    if(ct <  4600) return ['assemble', (ct-1400)/3200];
+    if(ct <  7200) return ['shake',    (ct-4600)/2600];
+    if(ct < 10000) return ['dissolve', (ct-7200)/2800];
+                   return ['rest',     (ct-10000)/2000];
+  }
+
+  // ── GSAP ScrollTrigger — section palette shifts
+  if (window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    ['hero','about','projects','skills','timeline','contact'].forEach((id,i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el, start: 'top center',
+        onEnter:     () => gsap.to(bgU.uSection, { value:i, duration:1.4, ease:'power2.out' }),
+        onEnterBack: () => gsap.to(bgU.uSection, { value:i, duration:1.4, ease:'power2.out' }),
+      });
+    });
+  }
+
+  // ── Mouse aurora
+  window.addEventListener('mousemove', e => {
+    bgU.uMouse.value.set(
+      e.clientX/innerWidth*2-1,
+      -((e.clientY/innerHeight)*2-1)
+    );
+  });
+
+  // ── Resize
+  window.addEventListener('resize', () => {
+    AR = innerWidth / innerHeight;
+    renderer.setSize(innerWidth, innerHeight);
+    camP.left=-AR; camP.right=AR;
+    camP.updateProjectionMatrix();
+  });
+
+  // ── Render loop
+  const clock = new THREE.Clock();
+  (function raf() {
+    requestAnimationFrame(raf);
+    const t = clock.getElapsedTime();
+    bgU.uTime.value = t;
+
+    if (!t0) t0 = performance.now();
+    const ct = (performance.now()-t0) % CYCLE;
+    const [ph, pr] = phase(ct);
+
+    if (ph !== lastPh) {
+      if (ph === 'assemble') assign(handPts());
+      if (ph === 'dissolve') scatter();
+      lastPh = ph;
+    }
+
+    let ga = 1;
+    if (ph==='drift')    ga = .15 + pr*.85;
+    if (ph==='dissolve') ga = 1   - pr*.92;
+    if (ph==='rest')     ga = .08 + pr*.07;
+
+    const shakeAmp = ph==='shake' ? Math.sin(pr*Math.PI)*.04 : 0;
+    const shakeY   = Math.sin(t*6.8) * shakeAmp;
+
+    for (let i = 0; i < N; i++) {
+      const ef = ph==='assemble' ? pe[i]*(.4+eio(pr)*1.6) : pe[i]*.5;
+      pvx[i] = pvx[i]*.86 + (ptx[i]-px_[i])*ef;
+      pvy[i] = pvy[i]*.86 + (pty[i]+shakeY-py_[i])*ef;
+      px_[i] += pvx[i]; py_[i] += pvy[i];
+      posA[i*3]=px_[i]; posA[i*3+1]=py_[i]; posA[i*3+2]=0;
+      alA[i] = pa[i] * ga;
+    }
+    geo.attributes.position.needsUpdate = true;
+    geo.attributes.aAlpha.needsUpdate   = true;
+    pU.uGlow.value = ph==='shake' ? Math.sin(pr*Math.PI)*.9 : 0;
+
+    renderer.autoClear = true;
+    renderer.render(bgScene, camBg);
+    renderer.autoClear = false;
+    renderer.render(pScene, camP);
+  })();
+
 })();
 </script>
 </body>
